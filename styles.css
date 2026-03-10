@@ -475,6 +475,29 @@ a {
   }
 }
 
+/* Education */
+
+.education-list {
+  border-top: 1px solid var(--border);
+}
+
+.education-item {
+  padding-block: 1.4rem;
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 85%, transparent);
+}
+
+.education-item__degree {
+  margin: 0 0 0.2rem;
+  font-family: "Crimson Pro", "Times New Roman", serif;
+  font-size: 1rem;
+}
+
+.education-item__school {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+}
+
 /* Projects */
 
 .grid {
@@ -503,6 +526,16 @@ a {
   box-shadow: 0 12px 25px rgba(15, 23, 42, 0.06);
 }
 
+.card--featured {
+  background: radial-gradient(circle at top left, white 0, var(--card) 55%);
+  border-color: color-mix(in oklch, var(--border) 95%, var(--primary) 5%);
+}
+
+.card--featured:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+}
+
 .card__meta {
   display: flex;
   justify-content: space-between;
@@ -522,10 +555,19 @@ a {
 }
 
 .card__body {
-  margin: 0 0 0.9rem;
+  margin: 0 0 0.7rem;
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--muted-foreground);
+}
+
+.card__label {
+  display: inline-block;
+  margin-right: 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: color-mix(in oklch, var(--muted-foreground) 85%, var(--foreground) 15%);
 }
 
 .card__tags {
@@ -602,34 +644,48 @@ a {
   gap: 1.2rem;
 }
 
-.contact-link {
+.contact__buttons {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.button {
+  display: inline-flex;
   align-items: center;
-  min-width: 11rem;
-  padding: 0.9rem 1.1rem;
-  border-radius: 0.6rem;
-  border: 1px solid color-mix(in oklch, var(--border) 88%, transparent);
-  background-color: white;
-  transition: border-color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
-}
-
-.contact-link:hover {
-  border-color: var(--border);
-  transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
-}
-
-.contact-link__label {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--muted-foreground);
-}
-
-.contact-link__value {
-  margin-top: 0.25rem;
+  justify-content: center;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
   font-size: 0.88rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease, transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.button--primary {
+  background-color: var(--foreground);
+  color: var(--primary-foreground);
+}
+
+.button--primary:hover {
+  background-color: color-mix(in oklch, var(--foreground) 90%, black 10%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+.button--ghost {
+  border-color: color-mix(in oklch, var(--border) 90%, transparent);
+  background-color: white;
+  color: var(--foreground);
+}
+
+.button--ghost:hover {
+  border-color: var(--border);
+  background-color: color-mix(in oklch, white 80%, var(--muted) 20%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 }
 
 /* Footer */
