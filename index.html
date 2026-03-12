@@ -9,23 +9,432 @@
       content="Personal portfolio for Zijun Wang, working at the intersection of data, sustainability, and human systems."
     />
     <link rel="icon" type="image/svg+xml" href="./assets/icons/icon.svg" />
-    <link rel="stylesheet" href="./styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    
+    <!-- Embedded CSS for standalone compilation -->
+    <style>
+      :root {
+        --bg: #fafafa;
+        --surface: #ffffff;
+        --text: #18181b;
+        --text-muted: #52525b;
+        --border: #e4e4e7;
+        --primary: #18181b;
+        --primary-hover: #3f3f46;
+        --radius: 12px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #09090b;
+          --surface: #18181b;
+          --text: #f4f4f5;
+          --text-muted: #a1a1aa;
+          --border: #27272a;
+          --primary: #f4f4f5;
+          --primary-hover: #d4d4d8;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1, h2, h3, h4, .nav__brand {
+        font-family: 'Crimson Pro', serif;
+        margin-top: 0;
+        color: var(--text);
+      }
+
+      .shell {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .site-header {
+        padding: 1.5rem 0;
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+        z-index: 50;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav__brand {
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .nav__list {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav__link {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        transition: color 0.2s;
+      }
+
+      .nav__link:hover {
+        color: var(--text);
+      }
+
+      .nav__toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text);
+        padding: 0.5rem;
+        cursor: pointer;
+      }
+
+      .section {
+        padding: 5rem 0;
+      }
+
+      .hero {
+        padding: 6rem 0 4rem;
+      }
+
+      .hero__title {
+        font-size: 3rem;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        max-width: 800px;
+      }
+
+      .hero__subtitle {
+        font-size: 1.15rem;
+        color: var(--text-muted);
+        max-width: 650px;
+        margin-bottom: 1rem;
+      }
+
+      .hero__featured {
+        margin-top: 4rem;
+      }
+
+      .projects__group-title, .pill-group__label {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+      }
+
+      .hero-card, .card {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 2rem;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .hero-card:hover, .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+      }
+      
+      /* New layout for Featured Project Card */
+      .card--featured-layout {
+        display: grid;
+        grid-template-columns: 1fr 2fr; /* ~33% visual, ~67% text */
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .card__visual {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* New image thumbnail styles for Selected Projects */
+      .card__image {
+        aspect-ratio: 16 / 9;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        overflow: hidden;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card__image svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .hero-card__title, .card__title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .hero-card__body, .card__body {
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+      }
+
+      .tag, .pill {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: var(--border);
+        color: var(--text);
+        border-radius: 99px;
+        font-size: 0.8rem;
+        margin: 0 0.5rem 0.5rem 0;
+      }
+
+      .hero-card__cta {
+        display: inline-block;
+        margin-top: 1rem;
+        font-weight: 500;
+        color: var(--primary);
+      }
+
+      .section-heading__title {
+        font-size: 2.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .about__grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 3rem;
+        align-items: start;
+      }
+
+      .about__portrait-frame img {
+        width: 100%;
+        border-radius: var(--radius);
+        object-fit: cover;
+        aspect-ratio: 1;
+        background: var(--border);
+      }
+
+      .timeline-item {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .timeline-item__meta {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-top: 0.3rem;
+      }
+
+      .timeline-item__title {
+        font-size: 1.3rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .timeline-item__org {
+        font-weight: 500;
+        margin-bottom: 1rem;
+      }
+
+      .timeline-item__desc, .about__body p {
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+      }
+
+      .pill-group {
+        margin-top: 2rem;
+      }
+
+      .education-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .education-item__degree {
+        font-size: 1.25rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .education-item__school {
+        color: var(--text-muted);
+        margin: 0;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .projects__group {
+        margin-bottom: 4rem;
+      }
+
+      .card__meta {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .contact__intro {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+      }
+
+      .contact__buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--radius);
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+      }
+
+      .button--primary {
+        background: var(--primary);
+        color: var(--bg);
+        border: 1px solid var(--primary);
+      }
+
+      .button--primary:hover {
+        background: var(--primary-hover);
+        border-color: var(--primary-hover);
+      }
+
+      .button--ghost {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+
+      .button--ghost:hover {
+        background: var(--border);
+      }
+
+      .site-footer {
+        padding: 3rem 0;
+        border-top: 1px solid var(--border);
+        color: var(--text-muted);
+      }
+
+      /* Utility centering for updated footer */
+      .site-footer__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .site-footer__meta {
+        text-align: center;
+        margin: 0;
+      }
+
+      @media (max-width: 768px) {
+        .nav__toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .nav__list {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: var(--bg);
+          flex-direction: column;
+          padding: 1.5rem;
+          border-bottom: 1px solid var(--border);
+          gap: 1.5rem;
+        }
+        .nav__list.is-open {
+          display: flex;
+        }
+        .hero__title {
+          font-size: 2.25rem;
+        }
+        .about__grid {
+          grid-template-columns: 1fr;
+        }
+        .timeline-item {
+          grid-template-columns: 1fr;
+          gap: 0.5rem;
+        }
+        .card--featured-layout {
+          grid-template-columns: 1fr; /* Stacks image above text on mobile */
+          gap: 1.5rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="site-header">
       <nav class="nav shell">
         <a href="#home" class="nav__brand">Zijun&nbsp;Wang</a>
+        
+        <!-- UPDATED 3: Replaced span lines with an SVG hamburger menu button -->
         <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false">
-          <span class="nav__toggle-line"></span>
-          <span class="nav__toggle-line"></span>
-          <span class="nav__toggle-line"></span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav__toggle-icon">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
         </button>
+        
         <ul class="nav__list">
           <li><a href="#home" class="nav__link">Home</a></li>
           <li><a href="#about" class="nav__link">About</a></li>
@@ -52,33 +461,6 @@
               complex systems evolve and how better decisions can be made within them.
             </p>
           </div>
-
-          <div class="hero__featured">
-            <a
-              href="https://v0-bridge-the-gap.vercel.app/"
-              target="_blank"
-              rel="noreferrer"
-              class="hero-card"
-            >
-              <div class="hero-card__header">
-                <h2 class="hero-card__title">Bridge the Gap</h2>
-              </div>
-              <p class="hero-card__body">
-                Bridge the Gap is a concept for a cross-cultural platform that uses food as a medium for connection and
-                cultural understanding. It explores how digital tools could combine ingredient discovery, cultural
-                storytelling, and community interaction to help people see how food connects cultures.
-              </p>
-              <div class="hero-card__meta">
-                <span class="tag">cross-cultural platform</span>
-                <span class="tag">food &amp; culture</span>
-                <span class="tag">community interaction</span>
-                <span class="tag">concept exploration</span>
-              </div>
-              <span class="hero-card__cta">Explore the project</span>
-            </a>
-          </div>
-
-          <div class="hero__divider" aria-hidden="true"></div>
         </div>
       </section>
 
@@ -94,6 +476,7 @@
               <div class="about__portrait-frame">
                 <img
                   src="./assets/images/placeholder-user.jpg"
+                  onerror="this.src='https://ui-avatars.com/api/?name=Zijun+Wang&size=400&background=f4f4f5&color=18181b'"
                   alt="Portrait placeholder"
                   class="about__portrait-image"
                 />
@@ -236,43 +619,75 @@
 
           <div class="projects__featured">
             <h3 class="projects__group-title">Featured Project</h3>
+            
             <a
               href="https://v0-bridge-the-gap.vercel.app/"
               target="_blank"
               rel="noreferrer"
               class="projects__featured-link"
+              style="text-decoration: none;"
             >
-              <article class="card card--project card--featured">
-                <div class="card__meta">
-                  <span class="card__category">Concept exploration</span>
+              <!-- UPDATED: Added card--featured-layout for 2-column split -->
+              <article class="hero-card card--featured-layout">
+                
+                <!-- Left Side: Visual Concept Diagram -->
+                <div class="card__visual">
+                  <svg viewBox="0 0 300 240" style="width: 100%; height: auto; border-radius: 10px; background: var(--bg); border: 1px solid var(--border);">
+                    <!-- Bridge/Connection metaphor diagram -->
+                    <path d="M 60 160 Q 150 60 240 160" fill="none" stroke="var(--border)" stroke-width="2" stroke-dasharray="4 4"/>
+                    <line x1="100" y1="120" x2="200" y2="120" stroke="var(--text-muted)" stroke-width="2"/>
+                    <circle cx="100" cy="120" r="24" fill="var(--bg)" stroke="var(--primary)" stroke-width="3"/>
+                    <circle cx="200" cy="120" r="24" fill="var(--bg)" stroke="var(--primary)" stroke-width="3"/>
+                    <circle cx="150" cy="120" r="6" fill="var(--text-muted)"/>
+                    <circle cx="125" cy="120" r="4" fill="var(--border)"/>
+                    <circle cx="175" cy="120" r="4" fill="var(--border)"/>
+                  </svg>
                 </div>
-                <h3 class="card__title">Bridge the Gap</h3>
-                <p class="card__body">
-                  Bridge the Gap is a concept for a cross-cultural platform that uses food as a medium for connection
-                  and cultural understanding. The idea emerged from encountering unfamiliar ingredients in international
-                  grocery stores—where curiosity exists but knowledge about how ingredients are used culturally is often
-                  missing.
-                </p>
-                <p class="card__body">
-                  The project explores how a digital platform could combine ingredient discovery, cultural storytelling,
-                  and community interaction to help people understand how food connects cultures. The long-term vision
-                  is to create a space where food becomes a bridge for cultural exchange among international students,
-                  migrants, and travelers.
-                </p>
-                <div class="card__tags">
-                  <span>cross-cultural platform</span>
-                  <span>food &amp; culture</span>
-                  <span>community interaction</span>
-                  <span>concept design</span>
+
+                <!-- Right Side: Text Content -->
+                <div class="card__content">
+                  <div class="card__meta" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">
+                    <span>Concept exploration</span>
+                  </div>
+                  <h2 class="hero-card__title">Bridge the Gap</h2>
+                  <p class="hero-card__body">
+                    Bridge the Gap is a concept for a cross-cultural platform that uses food as a medium for connection and
+                    cultural understanding. It explores how digital tools could combine ingredient discovery, cultural
+                    storytelling, and community interaction to help people see how food connects cultures.
+                  </p>
+                  <div class="hero-card__meta">
+                    <span class="tag">cross-cultural platform</span>
+                    <span class="tag">food &amp; culture</span>
+                    <span class="tag">community interaction</span>
+                    <span class="tag">concept exploration</span>
+                  </div>
+                  <span class="hero-card__cta">Explore the project &rarr;</span>
                 </div>
               </article>
             </a>
           </div>
 
-          <div class="projects__group">
+          <div class="projects__group" style="margin-top: 4rem;">
             <h3 class="projects__group-title">Selected Projects</h3>
             <div class="grid">
+              
               <article class="card card--project">
+                <!-- Visual Thumbnail: Network/ABM Model Diagram -->
+                <div class="card__image">
+                  <svg viewBox="0 0 400 225">
+                    <circle cx="200" cy="112" r="12" fill="var(--primary)"/>
+                    <circle cx="140" cy="70" r="8" fill="var(--text-muted)"/>
+                    <circle cx="260" cy="70" r="8" fill="var(--text-muted)"/>
+                    <circle cx="120" cy="150" r="6" fill="var(--border)"/>
+                    <circle cx="280" cy="150" r="6" fill="var(--border)"/>
+                    <line x1="200" y1="112" x2="140" y2="70" stroke="var(--border)" stroke-width="2"/>
+                    <line x1="200" y1="112" x2="260" y2="70" stroke="var(--border)" stroke-width="2"/>
+                    <line x1="140" y1="70" x2="120" y2="150" stroke="var(--border)" stroke-width="2"/>
+                    <line x1="260" y1="70" x2="280" y2="150" stroke="var(--border)" stroke-width="2"/>
+                    <line x1="200" y1="112" x2="120" y2="150" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4"/>
+                    <line x1="200" y1="112" x2="280" y2="150" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4"/>
+                  </svg>
+                </div>
                 <div class="card__meta">
                   <span class="card__category">Systems modeling &amp; communication</span>
                 </div>
@@ -290,6 +705,19 @@
               </article>
 
               <article class="card card--project">
+                <!-- Visual Thumbnail: Data/Trend Diagram -->
+                <div class="card__image">
+                  <svg viewBox="0 0 400 225">
+                    <line x1="80" y1="170" x2="320" y2="170" stroke="var(--border)" stroke-width="2"/>
+                    <line x1="80" y1="170" x2="80" y2="50" stroke="var(--border)" stroke-width="2"/>
+                    <rect x="110" y="130" width="30" height="40" fill="var(--text-muted)" opacity="0.3"/>
+                    <rect x="170" y="100" width="30" height="70" fill="var(--text-muted)" opacity="0.6"/>
+                    <rect x="230" y="140" width="30" height="30" fill="var(--text-muted)" opacity="0.3"/>
+                    <rect x="290" y="70" width="30" height="100" fill="var(--primary)" opacity="0.9"/>
+                    <polyline points="125,110 185,80 245,120 305,50" fill="none" stroke="var(--primary)" stroke-width="3"/>
+                    <circle cx="305" cy="50" r="4" fill="var(--bg)" stroke="var(--primary)" stroke-width="2"/>
+                  </svg>
+                </div>
                 <div class="card__meta">
                   <span class="card__category">Environmental data &amp; ESG</span>
                 </div>
@@ -307,6 +735,21 @@
               </article>
 
               <article class="card card--project">
+                <!-- Visual Thumbnail: Community Node Diagram -->
+                <div class="card__image">
+                  <svg viewBox="0 0 400 225">
+                    <circle cx="200" cy="112" r="40" fill="none" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 6"/>
+                    <circle cx="200" cy="112" r="14" fill="var(--primary)"/>
+                    <circle cx="140" cy="112" r="8" fill="var(--text-muted)"/>
+                    <circle cx="260" cy="112" r="8" fill="var(--text-muted)"/>
+                    <circle cx="200" cy="52" r="8" fill="var(--text-muted)"/>
+                    <circle cx="200" cy="172" r="8" fill="var(--text-muted)"/>
+                    <line x1="186" y1="112" x2="148" y2="112" stroke="var(--border)" stroke-width="2"/>
+                    <line x1="214" y1="112" x2="252" y2="112" stroke="var(--border)" stroke-width="2"/>
+                    <line x1="200" y1="98" x2="200" y2="60" stroke="var(--border)" stroke-width="2"/>
+                    <line x1="200" y1="126" x2="200" y2="164" stroke="var(--border)" stroke-width="2"/>
+                  </svg>
+                </div>
                 <div class="card__meta">
                   <span class="card__category">Community networks</span>
                 </div>
@@ -328,6 +771,8 @@
           <div class="projects__group projects__group--secondary">
             <h3 class="projects__group-title">More Projects</h3>
             <div class="grid">
+              
+              <!-- More Projects: Left exactly as text-only -->
               <article class="card card--project">
                 <div class="card__meta">
                   <span class="card__category">Computational social science</span>
@@ -394,64 +839,6 @@
         </div>
       </section>
 
-      <!-- Ideas (currently disabled; keep for future use) -->
-      <!--
-      <section id="ideas" class="section section--muted">
-        <div class="shell ideas">
-          <div class="section-heading">
-            <p class="eyebrow">Ideas</p>
-            <h2 class="section-heading__title">Notes from practice.</h2>
-          </div>
-
-          <div class="list">
-            <article class="list-item">
-              <div class="list-item__meta">February 2024</div>
-              <div class="list-item__body">
-                <h3 class="list-item__title">On the Texture of Place</h3>
-                <p class="list-item__desc">
-                  How markets, side streets, and in‑between spaces encode cultural memory—and what that means for how
-                  we design public systems.
-                </p>
-              </div>
-            </article>
-
-            <article class="list-item">
-              <div class="list-item__meta">January 2024</div>
-              <div class="list-item__body">
-                <h3 class="list-item__title">Systems Thinking for Everyday Decisions</h3>
-                <p class="list-item__desc">
-                  Moving beyond isolated KPIs toward questions that acknowledge feedback loops, trade‑offs, and
-                  unintended consequences.
-                </p>
-              </div>
-            </article>
-
-            <article class="list-item">
-              <div class="list-item__meta">December 2023</div>
-              <div class="list-item__body">
-                <h3 class="list-item__title">The Diffusion of Ideas</h3>
-                <p class="list-item__desc">
-                  What models of diffusion get wrong about culture—and how stories, relationships, and trust reshape
-                  any neat diagram.
-                </p>
-              </div>
-            </article>
-
-            <article class="list-item">
-              <div class="list-item__meta">November 2023</div>
-              <div class="list-item__body">
-                <h3 class="list-item__title">Cross‑Cultural Curiosity as Practice</h3>
-                <p class="list-item__desc">
-                  On listening, translation, and care when working across cultures, and why curiosity is a starting
-                  point—not an end.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-      -->
-
       <!-- Contact -->
       <section id="contact" class="section">
         <div class="shell contact">
@@ -463,7 +850,14 @@
           </p>
 
           <div class="contact__buttons">
-            <a href="mailto:hello@example.com" class="button button--primary">Email me</a>
+            <!-- UPDATED 4: Replaced email button with a new version including an icon -->
+            <a href="mailto:hello@example.com" class="button button--primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              Drop me an email
+            </a>
             <a href="https://linkedin.com/in/username" target="_blank" rel="noreferrer" class="button button--ghost">
               Connect on LinkedIn
             </a>
@@ -474,14 +868,50 @@
 
     <footer class="site-footer">
       <div class="shell site-footer__inner">
+        <!-- UPDATED 2: Temporarily commented out the quote element -->
+        <!-- 
         <p class="site-footer__quote">
           “The way we design systems quietly shapes how people relate, choose, and care.”
-        </p>
+        </p> 
+        -->
+        
+        <!-- UPDATED 2: Center aligned the meta element (aided by CSS updates above) -->
         <p class="site-footer__meta">© <span id="year"></span> Zijun Wang. All rights reserved.</p>
       </div>
     </footer>
 
-    <script src="./script.js"></script>
+    <!-- Script integrated for single-file preview capability -->
+    <script>
+      // Automatically set the current copyright year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Mobile Navigation functionality
+      const navToggle = document.querySelector('.nav__toggle');
+      const navList = document.querySelector('.nav__list');
+
+      if (navToggle && navList) {
+        navToggle.addEventListener('click', () => {
+          const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+          navToggle.setAttribute('aria-expanded', !isExpanded);
+          navList.classList.toggle('is-open');
+          
+          // Toggle between Hamburger menu icon and an "X" close icon
+          if (!isExpanded) {
+            navToggle.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>`;
+          } else {
+            navToggle.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" x2="20" y1="12" y2="12"></line>
+                <line x1="4" x2="20" y1="6" y2="6"></line>
+                <line x1="4" x2="20" y1="18" y2="18"></line>
+              </svg>`;
+          }
+        });
+      }
+    </script>
   </body>
 </html>
-
