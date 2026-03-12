@@ -123,27 +123,74 @@
         padding: 5rem 0;
       }
 
+      /* --- Updated Hero Styles for Think Tank Vibe --- */
       .hero {
         padding: 6rem 0 4rem;
       }
 
+      .eyebrow {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--text);
+        padding-bottom: 0.5rem;
+        display: inline-block;
+      }
+
       .hero__title {
-        font-size: 3rem;
+        font-size: 3.5rem;
         line-height: 1.1;
         margin-bottom: 1.5rem;
-        max-width: 800px;
+        max-width: 900px;
+        letter-spacing: -0.02em;
+      }
+
+      .hero__columns {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 4rem;
+        margin-top: 4rem;
+        padding-top: 3rem;
+        border-top: 1px solid var(--border);
       }
 
       .hero__subtitle {
         font-size: 1.15rem;
         color: var(--text-muted);
-        max-width: 650px;
         margin-bottom: 1rem;
       }
 
-      .hero__featured {
-        margin-top: 4rem;
+      .hero__competencies {
+        display: flex;
+        flex-direction: column;
       }
+
+      .competency-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border);
+        font-family: 'Crimson Pro', serif;
+        font-size: 1.25rem;
+        color: var(--text);
+      }
+
+      .competency-item:first-child {
+        padding-top: 0;
+      }
+
+      .competency-item::before {
+        content: '→';
+        margin-right: 1rem;
+        color: var(--text-muted);
+        font-family: 'Inter', sans-serif;
+      }
+
+      /* ---------------------------------------------- */
 
       .projects__group-title, .pill-group__label {
         font-family: 'Inter', sans-serif;
@@ -171,10 +218,9 @@
         box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
       }
       
-      /* New layout for Featured Project Card */
       .card--featured-layout {
         display: grid;
-        grid-template-columns: 1fr 2fr; /* ~33% visual, ~67% text */
+        grid-template-columns: 1fr 2fr;
         gap: 2.5rem;
         align-items: center;
       }
@@ -186,7 +232,6 @@
         align-items: center;
       }
 
-      /* New image thumbnail styles for Selected Projects */
       .card__image {
         aspect-ratio: 16 / 9;
         border-radius: 10px;
@@ -370,7 +415,6 @@
         color: var(--text-muted);
       }
 
-      /* Utility centering for updated footer */
       .site-footer__inner {
         display: flex;
         flex-direction: column;
@@ -407,6 +451,12 @@
         .hero__title {
           font-size: 2.25rem;
         }
+        .hero__columns {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          margin-top: 2rem;
+          padding-top: 2rem;
+        }
         .about__grid {
           grid-template-columns: 1fr;
         }
@@ -415,7 +465,7 @@
           gap: 0.5rem;
         }
         .card--featured-layout {
-          grid-template-columns: 1fr; /* Stacks image above text on mobile */
+          grid-template-columns: 1fr;
           gap: 1.5rem;
         }
       }
@@ -426,7 +476,6 @@
       <nav class="nav shell">
         <a href="#home" class="nav__brand">Zijun&nbsp;Wang</a>
         
-        <!-- UPDATED 3: Replaced span lines with an SVG hamburger menu button -->
         <button class="nav__toggle" aria-label="Toggle navigation" aria-expanded="false">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav__toggle-icon">
             <line x1="4" x2="20" y1="12" y2="12"></line>
@@ -451,15 +500,30 @@
       <section id="home" class="section section--full hero">
         <div class="shell hero__inner">
           <div class="hero__content">
-            <h1 class="hero__title">Understanding complex systems — from environmental data to human behavior.</h1>
-            <p class="hero__subtitle">
-              Zijun Wang is a systems-oriented analyst working at the intersection of environmental data, social systems,
-              and decision support.
-            </p>
-            <p class="hero__subtitle">
-              Her work combines spatial analysis, sustainability analytics, and computational modeling to explore how
-              complex systems evolve and how better decisions can be made within them.
-            </p>
+            <!-- Added Eyebrow for professional positioning -->
+            <p class="eyebrow">Strategic Analyst & Researcher</p>
+            
+            <!-- More commanding, thesis-driven title -->
+            <h1 class="hero__title">Translating complex environmental and social data into actionable systemic insights.</h1>
+            
+            <!-- Think Tank style editorial split layout -->
+            <div class="hero__columns">
+              <div class="hero__summary">
+                <p class="hero__subtitle">
+                  Zijun Wang is a systems-oriented analyst specializing in human-environment interactions. 
+                  By combining spatial analysis, computational modeling, and sustainability analytics, she helps 
+                  organizations navigate complex transitions, build resilient systems, and support critical decision-making.
+                </p>
+              </div>
+              
+              <div class="hero__competencies">
+                <span class="competency-item">Systems Modeling</span>
+                <span class="competency-item">ESG Analytics</span>
+                <span class="competency-item">Spatial Analysis</span>
+                <span class="competency-item">Decision Support</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -617,6 +681,7 @@
             <h2 class="section-heading__title">Projects</h2>
           </div>
 
+          <!-- Featured Project is now appropriately seated in the Projects section -->
           <div class="projects__featured">
             <h3 class="projects__group-title">Featured Project</h3>
             
@@ -627,13 +692,10 @@
               class="projects__featured-link"
               style="text-decoration: none;"
             >
-              <!-- UPDATED: Added card--featured-layout for 2-column split -->
               <article class="hero-card card--featured-layout">
                 
-                <!-- Left Side: Visual Concept Diagram -->
                 <div class="card__visual">
                   <svg viewBox="0 0 300 240" style="width: 100%; height: auto; border-radius: 10px; background: var(--bg); border: 1px solid var(--border);">
-                    <!-- Bridge/Connection metaphor diagram -->
                     <path d="M 60 160 Q 150 60 240 160" fill="none" stroke="var(--border)" stroke-width="2" stroke-dasharray="4 4"/>
                     <line x1="100" y1="120" x2="200" y2="120" stroke="var(--text-muted)" stroke-width="2"/>
                     <circle cx="100" cy="120" r="24" fill="var(--bg)" stroke="var(--primary)" stroke-width="3"/>
@@ -644,7 +706,6 @@
                   </svg>
                 </div>
 
-                <!-- Right Side: Text Content -->
                 <div class="card__content">
                   <div class="card__meta" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">
                     <span>Concept exploration</span>
@@ -672,7 +733,6 @@
             <div class="grid">
               
               <article class="card card--project">
-                <!-- Visual Thumbnail: Network/ABM Model Diagram -->
                 <div class="card__image">
                   <svg viewBox="0 0 400 225">
                     <circle cx="200" cy="112" r="12" fill="var(--primary)"/>
@@ -705,7 +765,6 @@
               </article>
 
               <article class="card card--project">
-                <!-- Visual Thumbnail: Data/Trend Diagram -->
                 <div class="card__image">
                   <svg viewBox="0 0 400 225">
                     <line x1="80" y1="170" x2="320" y2="170" stroke="var(--border)" stroke-width="2"/>
@@ -735,7 +794,6 @@
               </article>
 
               <article class="card card--project">
-                <!-- Visual Thumbnail: Community Node Diagram -->
                 <div class="card__image">
                   <svg viewBox="0 0 400 225">
                     <circle cx="200" cy="112" r="40" fill="none" stroke="var(--border)" stroke-width="2" stroke-dasharray="6 6"/>
@@ -772,7 +830,6 @@
             <h3 class="projects__group-title">More Projects</h3>
             <div class="grid">
               
-              <!-- More Projects: Left exactly as text-only -->
               <article class="card card--project">
                 <div class="card__meta">
                   <span class="card__category">Computational social science</span>
@@ -850,7 +907,6 @@
           </p>
 
           <div class="contact__buttons">
-            <!-- UPDATED 4: Replaced email button with a new version including an icon -->
             <a href="mailto:hello@example.com" class="button button--primary">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect width="20" height="16" x="2" y="4" rx="2"></rect>
@@ -868,24 +924,13 @@
 
     <footer class="site-footer">
       <div class="shell site-footer__inner">
-        <!-- UPDATED 2: Temporarily commented out the quote element -->
-        <!-- 
-        <p class="site-footer__quote">
-          “The way we design systems quietly shapes how people relate, choose, and care.”
-        </p> 
-        -->
-        
-        <!-- UPDATED 2: Center aligned the meta element (aided by CSS updates above) -->
         <p class="site-footer__meta">© <span id="year"></span> Zijun Wang. All rights reserved.</p>
       </div>
     </footer>
 
-    <!-- Script integrated for single-file preview capability -->
     <script>
-      // Automatically set the current copyright year
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Mobile Navigation functionality
       const navToggle = document.querySelector('.nav__toggle');
       const navList = document.querySelector('.nav__list');
 
@@ -895,7 +940,6 @@
           navToggle.setAttribute('aria-expanded', !isExpanded);
           navList.classList.toggle('is-open');
           
-          // Toggle between Hamburger menu icon and an "X" close icon
           if (!isExpanded) {
             navToggle.innerHTML = `
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
